@@ -93,7 +93,9 @@ const RU = {
  "Parola a fost schimbată.": "Пароль изменён.",
  "Email sau parolă greșită.": "Неверный email или пароль.",
  "Confirmă mai întâi emailul din mesajul primit.": "Сначала подтвердите email из полученного письма.",
- "Linkul trebuie să înceapă cu https://": "Ссылка должна начинаться с https://",
+ "Link sau cod de programare invalid. Copiază linkul complet de pe eservicii.gov.md.": "Неверная ссылка или код записи. Скопируйте полную ссылку с eservicii.gov.md.",
+ "Ultima verificare:": "Последняя проверка:",
+ "Programarea ta actuală:": "Ваша текущая запись:",
  "Existe deja un cont cu acest email.": "Аккаунт с таким email уже существует."
 };
 

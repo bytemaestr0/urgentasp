@@ -9,6 +9,7 @@ import Cont from "./components/Account";
 import Prog from "./components/Booking";
 import { Login, Signup, Forgot, Reset } from "./components/Auth";
 
+const LINK_OK = /^(https:\/\/eservicii\.gov\.md\/asp\/dimtcca\/cerere\/[A-Za-z0-9]{3,12}\/Edit\/)?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/?([?#].*)?$/i;
 const LINKS = [["/", "Acasă"], ["/instructiuni", "Instrucțiuni"], ["/programare", "Programare"], ["/cont", "Cont"]];
 
 function Authed({ user, children }) {
@@ -39,15 +40,15 @@ export default function App() {
   useEffect(() => {
     if (!user) { setS(DEF); return; }
     sb.from("profiles").select("*").eq("id", user.id).single().then(({ data }) => {
-      if (data) setS({ ...DEF, name: data.name || "", email: user.email, plan: data.plan, link: data.link || "", ntfy: data.ntfy || "", freeMode: data.free_mode, auto: data.auto, excluded: data.excluded || [] });
+      if (data) setS({ ...DEF, name: data.name || "", email: user.email, plan: data.plan, link: data.link || "", ntfy: data.ntfy || "", freeMode: data.free_mode, auto: data.auto, excluded: data.excluded || [], lastChecked: data.last_checked, lastError: data.last_error, currentExam: data.current_exam_date });
     });
   }, [user]);
 
   const save = async () => {
-    if (s.link && !/^https:\/\/[^\s]+$/i.test(s.link)) return { error: { message: t("Linkul trebuie să înceapă cu https://") } };
+    if (s.link && !LINK_OK.test(s.link.trim())) return { error: { message: t("Link sau cod de programare invalid. Copiază linkul complet de pe eservicii.gov.md.") } };
     return doSave();
   };
-  const doSave = () => sb.from("profiles").update({ link: s.link, ntfy: s.ntfy, free_mode: s.freeMode, auto: s.plan === "paid" && s.auto, excluded: s.plan === "paid" ? s.excluded : [] }).eq("id", user.id);
+  const doSave = () => sb.from("profiles").update({ link: s.link.trim(), ntfy: s.ntfy, free_mode: s.freeMode, auto: s.plan === "paid" && s.auto, excluded: s.plan === "paid" ? s.excluded : [] }).eq("id", user.id);
 
   useEffect(() => {
     const els = [...document.querySelectorAll("main .stripe,main h1,main h2,main .lead,main .row,main .sub,main .card,main .steps li")];
