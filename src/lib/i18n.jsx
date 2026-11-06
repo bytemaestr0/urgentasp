@@ -96,7 +96,16 @@ const RU = {
  "Link sau cod de programare invalid. Copiază linkul complet de pe eservicii.gov.md.": "Неверная ссылка или код записи. Скопируйте полную ссылку с eservicii.gov.md.",
  "Ultima verificare:": "Последняя проверка:",
  "Programarea ta actuală:": "Ваша текущая запись:",
- "Existe deja un cont cu acest email.": "Аккаунт с таким email уже существует."
+ "Existe deja un cont cu acest email.": "Аккаунт с таким email уже существует.",
+ "Meniu": "Меню",
+ "Monitorizare activă 24/7": "Мониторинг 24/7",
+ "Ce spun utilizatorii": "Что говорят пользователи",
+ "Oameni care au prins un loc înaintea celorlalți.": "Люди, которые успели занять место раньше других.",
+ "Căutam de două luni o dată liberă pentru examen. În a treia zi cu UrgentASP am primit notificarea și am prins un loc cu o săptămână mai devreme.": "Два месяца искал свободную дату для экзамена. На третий день с UrgentASP пришло уведомление, и я занял место на неделю раньше.",
+ "Nu mai stau cu pagina deschisă noaptea. Telefonul sună când apare ceva, iar linkul l-am pus în două minute.": "Больше не сижу ночью с открытой страницей. Телефон звонит, когда что-то появляется, а ссылку я вставила за две минуты.",
+ "Cu planul Plus am exclus zilele în care lucrez și restul s-a făcut singur. Cel mai bun mod de a scăpa de stresul programării.": "С тарифом Plus я исключил рабочие дни, а остальное произошло само. Лучший способ избавиться от стресса при записи.",
+ "Andrei M.": "Андрей М.", "Elena C.": "Елена К.", "Dmitri P.": "Дмитрий П.",
+ "Chișinău": "Кишинёв", "Bălți": "Бельцы", "Cahul": "Кагул"
 };
 
 const Ctx = createContext({ lang: "ro", setLang: () => {}, t: (s) => s });
