@@ -72,7 +72,7 @@ export function Signup() {
     if (pw.length < 6) return setMsg(t("Parola trebuie să aibă cel puțin 6 caractere."));
     if (pw !== pw2) return setMsg(t("Parolele nu coincid."));
     setBusy(true);
-    const { data, error } = await sb.auth.signUp({ email: em, password: pw, options: { data: { name: nm }, emailRedirectTo: window.location.origin + "/login" } });
+    const { data, error } = await sb.auth.signUp({ email: em, password: pw, options: { data: { name: nm }, emailRedirectTo: "https://urgentasp.com/login" } });
     if (error) setMsg(t(ro(error.message)));
     else if (!data.session) setOk(true);
     setBusy(false);
