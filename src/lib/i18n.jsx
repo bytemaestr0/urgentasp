@@ -1,0 +1,116 @@
+import { createContext, useContext, useEffect, useState } from "react";
+
+const RU = {
+ "Acasă": "Главная",
+ "Instrucțiuni": "Инструкции",
+ "Programare": "Запись",
+ "Cont": "Аккаунт",
+ "Programări la ASP, înainte să te prindă alții.": "Запись в ASP — раньше, чем успеют другие.",
+ "UrgentASP urmărește locurile libere non-stop și îți trimite notificare pe telefon în secunda în care apare o dată. Fără refresh la pagină la 3 dimineața.": "UrgentASP круглосуточно следит за свободными местами и присылает уведомление на телефон в ту секунду, когда появляется дата. Без обновления страницы в 3 часа ночи.",
+ "Începe acum": "Начать сейчас",
+ "Cum funcționează": "Как это работает",
+ "Programare rapidă": "Быстрая запись",
+ "Verificăm datele disponibile continuu și te anunțăm instant, ca să ajungi primul la loc.": "Мы постоянно проверяем доступные даты и мгновенно сообщаем вам, чтобы вы успели первым.",
+ "Notificări ntfy": "Уведомления ntfy",
+ "Primești alerta direct pe telefon, fără cont și fără aplicații grele.": "Оповещение приходит прямо на телефон — без аккаунта и тяжёлых приложений.",
+ "Autoprogramare": "Автозапись",
+ "Cu planul Plus, rezervăm noi locul pentru tine și sărim peste zilele pe care le excluzi.": "С тарифом Plus мы сами бронируем место и пропускаем дни, которые вы исключили.",
+ "Ilustrație pasul": "Иллюстрация, шаг",
+ "Link programare": "Ссылка на запись",
+ "Cod ntfy": "Код ntfy",
+ "Salvează": "Сохранить",
+ "Loc liber!": "Есть место!",
+ "joi": "чт",
+ "Instalează ntfy": "Установите ntfy",
+ "Descarcă aplicația ntfy pe telefon (Android sau iOS) și abonează-te la un topic ales de tine, de exemplu": "Скачайте приложение ntfy на телефон (Android или iOS) и подпишитесь на придуманный вами топик, например",
+ "Alege ceva greu de ghicit.": "Выберите что-нибудь, что трудно угадать.",
+ "Copiază linkul de programare": "Скопируйте ссылку на запись",
+ "Deschide pagina de programare a ASP pentru serviciul dorit și copiază adresa din bara browserului.": "Откройте страницу записи ASP для нужной услуги и скопируйте адрес из адресной строки браузера.",
+ "Completează setările": "Заполните настройки",
+ "La pagina Programare lipește linkul și codul ntfy, apoi alege ce date vrei: doar cele noi sau toate cele disponibile.": "На странице «Запись» вставьте ссылку и код ntfy, затем выберите даты: только новые или все доступные.",
+ "Așteaptă alerta": "Ждите оповещения",
+ "Când apare un loc, primești notificarea. Cu planul Plus, activează Autoprogramare și lasă-ne să rezervăm noi.": "Когда появится место, вы получите уведомление. С тарифом Plus включите автозапись, и мы забронируем сами.",
+ "Pasul {n} din {total}": "Шаг {n} из {total}",
+ "Înapoi": "Назад",
+ "Mergi la Programare": "Перейти к записи",
+ "Următorul pas": "Следующий шаг",
+ "Planul tău:": "Ваш тариф:",
+ "Plus (plătit)": "Plus (платный)",
+ "Gratuit": "Бесплатный",
+ "Nume": "Имя",
+ "Email": "Email",
+ "Alerte ntfy": "Оповещения ntfy",
+ "Doar date noi sau toate datele": "Только новые или все даты",
+ "Fără autoprogramare": "Без автозаписи",
+ "Tot din Gratuit": "Всё из бесплатного",
+ "Autoprogramare cu date excluse": "Автозапись с исключёнными датами",
+ "Verificare prioritară": "Приоритетная проверка",
+ "Plan activ": "Тариф активен",
+ "Plata se activează în curând": "Оплата скоро появится",
+ "Ieși din cont": "Выйти из аккаунта",
+ "lei": "лей",
+ "lună": "мес.",
+ "Setările căutării tale. Plan:": "Настройки вашего поиска. Тариф:",
+ "Cod ntfy (topic)": "Код ntfy (топик)",
+ "Notificările merg la": "Уведомления приходят на",
+ "Ce date vrei să primești?": "Какие даты вы хотите получать?",
+ "Doar date mai noi": "Только более новые даты",
+ "Te anunțăm doar când apar locuri mai devreme decât cele cunoscute.": "Мы сообщим только когда появятся места раньше известных.",
+ "Toate datele disponibile": "Все доступные даты",
+ "Primești alertă pentru orice loc liber.": "Вы получите оповещение о любом свободном месте.",
+ "Autoprogramarea și datele excluse sunt în planul Plus.": "Автозапись и исключённые даты доступны в тарифе Plus.",
+ "Vezi planurile": "Смотреть тарифы",
+ "Rezervăm automat primul loc care nu e într-o dată exclusă.": "Мы автоматически бронируем первое место, которое не попадает на исключённую дату.",
+ "Date excluse pentru autoprogramare": "Исключённые даты для автозаписи",
+ "Adaugă": "Добавить",
+ "Nicio dată exclusă.": "Исключённых дат нет.",
+ "Șterge": "Удалить",
+ "Salvează setările": "Сохранить настройки",
+ "Salvat ✓": "Сохранено ✓",
+ "Autentificare": "Вход",
+ "Intră în cont ca să-ți gestionezi programările.": "Войдите в аккаунт, чтобы управлять записями.",
+ "Nu ai cont?": "Нет аккаунта?",
+ "Creează cont": "Создать аккаунт",
+ "Parolă": "Пароль",
+ "Ține-mă minte": "Запомнить меня",
+ "Am uitat parola": "Забыли пароль",
+ "Intră în cont": "Войти",
+ "Contul îți salvează setările și planul.": "Аккаунт сохраняет ваши настройки и тариф.",
+ "Ai deja cont?": "Уже есть аккаунт?",
+ "Autentifică-te": "Войти",
+ "Confirmă parola": "Подтвердите пароль",
+ "Parola trebuie să aibă cel puțin 6 caractere.": "Пароль должен содержать не менее 6 символов.",
+ "Parolele nu coincid.": "Пароли не совпадают.",
+ "Cont creat. Verifică emailul și confirmă adresa, apoi autentifică-te.": "Аккаунт создан. Проверьте почту и подтвердите адрес, затем войдите.",
+ "Resetează parola": "Сброс пароля",
+ "Îți trimitem un link de resetare pe email.": "Мы отправим ссылку для сброса на вашу почту.",
+ "Înapoi la autentificare": "Назад ко входу",
+ "Dacă există un cont cu acest email, ți-am trimis linkul de resetare.": "Если аккаунт с таким email существует, мы отправили ссылку для сброса.",
+ "Trimite linkul": "Отправить ссылку",
+ "Parolă nouă": "Новый пароль",
+ "Alege o parolă nouă pentru contul tău.": "Выберите новый пароль для аккаунта.",
+ "Schimbă parola": "Сменить пароль",
+ "Parola a fost schimbată.": "Пароль изменён.",
+ "Email sau parolă greșită.": "Неверный email или пароль.",
+ "Confirmă mai întâi emailul din mesajul primit.": "Сначала подтвердите email из полученного письма.",
+ "Linkul trebuie să înceapă cu https://": "Ссылка должна начинаться с https://",
+ "Existe deja un cont cu acest email.": "Аккаунт с таким email уже существует."
+};
+
+const Ctx = createContext({ lang: "ro", setLang: () => {}, t: (s) => s });
+
+export function I18nProvider({ children }) {
+  const [lang, setLang] = useState(() => localStorage.getItem("urgentasp-lang") || "ro");
+  useEffect(() => {
+    localStorage.setItem("urgentasp-lang", lang);
+    document.documentElement.lang = lang;
+  }, [lang]);
+  const t = (s, v) => {
+    let out = lang === "ru" ? RU[s] || s : s;
+    if (v) for (const k in v) out = out.replace("{" + k + "}", v[k]);
+    return out;
+  };
+  return <Ctx.Provider value={{ lang, setLang, t }}>{children}</Ctx.Provider>;
+}
+
+export const useI18n = () => useContext(Ctx);
