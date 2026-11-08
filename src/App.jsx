@@ -107,7 +107,7 @@ export default function App() {
   useEffect(() => {
     if (!user) { setS(DEF); return; }
     sb.from("profiles").select("*").eq("id", user.id).single().then(({ data }) => {
-      if (data) setS({ ...DEF, name: data.name || "", email: user.email, plan: data.plan, link: data.link || "", ntfy: data.ntfy || "", freeMode: data.free_mode, auto: data.auto, excluded: data.excluded || [], lastChecked: data.last_checked, lastError: data.last_error, currentExam: data.current_exam_date });
+      if (data) setS({ ...DEF, name: data.name || "", email: user.email, plan: data.plan, payCode: data.pay_code || "", link: data.link || "", ntfy: data.ntfy || "", freeMode: data.free_mode, auto: data.auto, excluded: data.excluded || [], lastChecked: data.last_checked, lastError: data.last_error, currentExam: data.current_exam_date });
     });
   }, [user]);
 
