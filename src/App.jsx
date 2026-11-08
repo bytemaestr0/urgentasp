@@ -113,9 +113,17 @@ export default function App() {
 
   const save = async () => {
     if (s.link && !LINK_OK.test(s.link.trim())) return { error: { message: t("Link sau cod de programare invalid. Copiază linkul complet de pe eservicii.gov.md.") } };
-    return doSave();
+    const taken = { error: { message: t("Acest cod ntfy este deja folosit de alt cont. Alege altul.") } };
+    const code = s.ntfy.trim();
+    if (code) {
+      const { data: free, error } = await sb.rpc("ntfy_available", { p_code: code });
+      if (error) return { error };
+      if (!free) return taken;
+    }
+    const res = await doSave();
+    return res.error?.code === "23505" ? taken : res;
   };
-  const doSave = () => sb.from("profiles").update({ link: s.link.trim(), ntfy: s.ntfy, free_mode: s.freeMode, auto: s.plan === "paid" && s.auto, excluded: s.plan === "paid" ? s.excluded : [] }).eq("id", user.id);
+  const doSave = () => sb.from("profiles").update({ link: s.link.trim(), ntfy: s.ntfy.trim(), free_mode: s.freeMode, auto: s.plan === "paid" && s.auto, excluded: s.plan === "paid" ? s.excluded : [] }).eq("id", user.id);
 
   useEffect(() => {
     const els = [...document.querySelectorAll("main .stripe,main h1,main h2,main .lead,main .row,main .sub,main .card,main .steps li")];

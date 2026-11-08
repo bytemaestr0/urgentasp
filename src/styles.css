@@ -250,3 +250,30 @@ input[type=text]:focus,input[type=password]:focus,input[type=email]:focus,input[
 a{transition:color .2s}
 
 @media (prefers-reduced-motion:reduce){body::before{animation:none}}
+
+/* --- instructions: photo galleries --- */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.gal{min-width:0;margin-bottom:18px}
+.duo .gal{margin-bottom:0}
+.gal-l{text-align:center;font:800 14px Unbounded,sans-serif;margin-bottom:10px}
+.gal-v{--ar:.5;position:relative;overflow:hidden;margin-inline:auto;aspect-ratio:var(--ar);width:min(100%,calc(520px*var(--ar)));
+  border-radius:20px;border:1px solid var(--line);background:var(--bg);box-shadow:0 14px 34px rgba(10,31,68,.14);touch-action:pan-y;user-select:none}
+.gal-t{display:flex;height:100%;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.gal-s{flex:0 0 100%;height:100%}
+.gal-s img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none}
+.ph{height:100%;display:grid;place-content:center;justify-items:center;gap:8px;padding:16px;text-align:center;color:var(--mut);font-size:13px;
+  background:repeating-linear-gradient(135deg,transparent 0 12px,color-mix(in srgb,var(--line) 50%,transparent) 12px 24px)}
+.ph span{font-size:28px}
+.gal-c{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:12px}
+.gal-n{font-weight:600;font-size:14px;min-width:54px;text-align:center;color:var(--mut)}
+.gbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);cursor:pointer;display:grid;place-items:center;transition:transform .2s,background-color .25s,color .25s,border-color .25s,opacity .2s}
+.gbtn:hover:not(:disabled){background:var(--y);color:#0a1f44;border-color:var(--y);transform:scale(1.1)}
+.gbtn:active:not(:disabled){transform:scale(.92)}
+.gbtn:disabled{opacity:.35;cursor:not-allowed}
+.gal-d{display:flex;justify-content:center;gap:6px;margin-top:10px}
+.gal-d i{width:7px;height:7px;border-radius:50%;background:var(--line);cursor:pointer;transition:width .3s,background-color .3s}
+.gal-d i.on{width:22px;border-radius:4px;background:var(--y)}
+a.inl{display:inline-block;margin-top:10px;font-weight:600;color:var(--b);text-decoration:none;border-bottom:2px solid var(--y);transition:transform .2s}
+a.inl:hover{transform:translateX(4px)}
+@media(max-width:560px){.duo{gap:8px}.gal-l{font-size:12px}.gbtn{width:34px;height:34px}.gal-v{border-radius:14px}}
+@media (prefers-reduced-motion:reduce){.gal-t{transition:none}}

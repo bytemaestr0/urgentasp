@@ -3,9 +3,9 @@ import { useI18n } from "../lib/i18n";
 // NOTE: these are SAMPLE testimonials (placeholders). Replace them with real feedback
 // from real users (with their permission) before launching publicly.
 const REVIEWS = [
-  { q: "Căutam de două luni o dată liberă pentru examen. În a treia zi cu UrgentASP am primit notificarea și am prins un loc cu o săptămână mai devreme.", n: "Andrei M.", c: "Chișinău" },
-  { q: "Nu mai stau cu pagina deschisă noaptea. Telefonul sună când apare ceva, iar linkul l-am pus în două minute.", n: "Elena C.", c: "Bălți" },
-  { q: "Cu planul Plus am exclus zilele în care lucrez și restul s-a făcut singur. Cel mai bun mod de a scăpa de stresul programării.", n: "Dmitri P.", c: "Cahul" },
+  { q: "Eram programat peste două luni. În a treia zi cu UrgentASP am primit notificarea și am prins un loc liber pentru săptămâna următoare.", n: "Andrei H.", c: "Chișinău" },
+  { q: "Nu mai stau cu pagina deschisă noaptea. Telefonul sună când apare ceva, iar linkul l-am pus în două minute.", n: "Elina R.", c: "Chișinău" },
+  { q: "Cu planul Plus am exclus zilele în care lucrez și restul s-a făcut singur. Cel mai bun mod de a scăpa de stresul programării.", n: "Dragoș J.", c: "Chișinău" },
 ];
 
 function Home({ go }) {
@@ -15,14 +15,14 @@ function Home({ go }) {
       <div>
         <div className="pill"><i />{t("Monitorizare activă 24/7")}</div>
         <div className="stripe" />
-        <h1>{t("Programări la ASP, înainte să te prindă alții.")}</h1>
+        <h1>{t("Programări la ASP, fără să aștepți 2 luni.")}</h1>
         <p className="lead">{t("UrgentASP urmărește locurile libere non-stop și îți trimite notificare pe telefon în secunda în care apare o dată. Fără refresh la pagină la 3 dimineața.")}</p>
         <div className="row"><button className="btn" onClick={() => go("cont")}>{t("Începe acum")}</button><button className="btn ghost" onClick={() => go("instructiuni")}>{t("Cum funcționează")}</button></div>
       </div>
     </section>
     <div className="grid3">
       <div className="card"><div className="ico">⚡</div><h3>{t("Programare rapidă")}</h3><p>{t("Verificăm datele disponibile continuu și te anunțăm instant, ca să ajungi primul la loc.")}</p></div>
-      <div className="card"><div className="ico b">🔔</div><h3>{t("Notificări ntfy")}</h3><p>{t("Primești alerta direct pe telefon, fără cont și fără aplicații grele.")}</p></div>
+      <div className="card"><div className="ico b">🔔</div><h3>{t("Notificări ntfy")}</h3><p>{t("Primești alerta direct pe telefon, la orice oră.")}</p></div>
       <div className="card"><div className="ico r">🤖</div><h3>{t("Autoprogramare")}</h3><p>{t("Cu planul Plus, rezervăm noi locul pentru tine și sărim peste zilele pe care le excluzi.")}</p></div>
     </div>
     <section className="tsec">

@@ -7,6 +7,7 @@ const ro = (m) => ({
   "Invalid login credentials": "Email sau parolă greșită.",
   "Email not confirmed": "Confirmă mai întâi emailul din mesajul primit.",
   "User already registered": "Există deja un cont cu acest email.",
+  "Database error saving new user": "Acest nume de utilizator este deja folosit.",
 }[m] || m);
 
 function Shell({ title, sub, children, foot }) {
@@ -69,11 +70,18 @@ export function Signup() {
 
   const submit = async (e) => {
     e.preventDefault(); setMsg("");
+    const name = nm.trim().replace(/\s+/g, " ");
+    const email = em.trim().toLowerCase();
+    if (name.length < 3) return setMsg(t("Numele de utilizator trebuie să aibă cel puțin 3 caractere."));
     if (pw.length < 6) return setMsg(t("Parola trebuie să aibă cel puțin 6 caractere."));
     if (pw !== pw2) return setMsg(t("Parolele nu coincid."));
     setBusy(true);
-    const { data, error } = await sb.auth.signUp({ email: em, password: pw, options: { data: { name: nm }, emailRedirectTo: SITE_URL + "/login" } });
+    const { data: free, error: ne } = await sb.rpc("username_available", { p_name: name });
+    if (ne) { setBusy(false); return setMsg(ne.message); }
+    if (!free) { setBusy(false); return setMsg(t("Acest nume de utilizator este deja folosit.")); }
+    const { data, error } = await sb.auth.signUp({ email, password: pw, options: { data: { name }, emailRedirectTo: SITE_URL + "/login" } });
     if (error) setMsg(t(ro(error.message)));
+    else if (data.user && (data.user.identities || []).length === 0) setMsg(t("Există deja un cont cu acest email."));
     else if (!data.session) setOk(true);
     setBusy(false);
   };
@@ -83,7 +91,7 @@ export function Signup() {
       foot={<>{t("Ai deja cont?")} <Link to="/login">{t("Autentifică-te")}</Link></>}>
       {ok ? <p className="okmsg">{t("Cont creat. Verifică emailul și confirmă adresa, apoi autentifică-te.")}</p> :
       <form onSubmit={submit}>
-        <Field id="sn" label={t("Nume")} type="text" value={nm} onChange={(e) => setNm(e.target.value)} autoComplete="name" />
+        <Field id="sn" label={t("Nume")} type="text" value={nm} onChange={(e) => setNm(e.target.value)} autoComplete="username" maxLength={40} required />
         <Field id="se" label={t("Email")} type="email" value={em} onChange={(e) => setEm(e.target.value)} autoComplete="email" required />
         <Field id="sp" label={t("Parolă")} type="password" value={pw} onChange={(e) => setPw(e.target.value)} autoComplete="new-password" required />
         <Field id="sp2" label={t("Confirmă parola")} type="password" value={pw2} onChange={(e) => setPw2(e.target.value)} autoComplete="new-password" required />
