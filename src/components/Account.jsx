@@ -21,7 +21,7 @@ function Copy({text}){
 function Cont({s,set,user}){
   const {t}=useI18n();
   const [pay,setPay]=useState(false);
-  const msg=s.payCode?"cod unic: "+s.payCode:"";
+  const msg=s.payCode||"";
   const upd=(p)=>set({...s,...p});
   return <>
     <h2>{t("Cont")}</h2><p className="sub">{t("Planul tău:")} <span className={"badge "+(s.plan==="paid"?"paid":"")}>{s.plan==="paid"?t("Plus (plătit)"):t("Gratuit")}</span></p>
