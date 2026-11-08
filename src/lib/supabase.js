@@ -13,3 +13,6 @@ export const sb = createClient(
   import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
   { auth: { storage } }
 );
+
+// Adresa la care duc linkurile din emailuri (confirmare cont, resetare parolă).
+export const SITE_URL = (import.meta.env.VITE_SITE_URL || "https://urgentasp.com").replace(/\/$/, "");

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { sb } from "../lib/supabase";
+import { sb, SITE_URL } from "../lib/supabase";
 import { useI18n } from "../lib/i18n";
 
 const ro = (m) => ({
@@ -72,7 +72,7 @@ export function Signup() {
     if (pw.length < 6) return setMsg(t("Parola trebuie să aibă cel puțin 6 caractere."));
     if (pw !== pw2) return setMsg(t("Parolele nu coincid."));
     setBusy(true);
-    const { data, error } = await sb.auth.signUp({ email: em, password: pw, options: { data: { name: nm }, emailRedirectTo: "https://urgentasp.com/login" } });
+    const { data, error } = await sb.auth.signUp({ email: em, password: pw, options: { data: { name: nm }, emailRedirectTo: SITE_URL + "/login" } });
     if (error) setMsg(t(ro(error.message)));
     else if (!data.session) setOk(true);
     setBusy(false);
@@ -99,7 +99,7 @@ export function Forgot() {
   const [em, setEm] = useState(""); const [msg, setMsg] = useState(""); const [ok, setOk] = useState(false); const [busy, setBusy] = useState(false);
   const submit = async (e) => {
     e.preventDefault(); setBusy(true); setMsg("");
-    const { error } = await sb.auth.resetPasswordForEmail(em, { redirectTo: window.location.origin + "/reset-password" });
+    const { error } = await sb.auth.resetPasswordForEmail(em, { redirectTo: SITE_URL + "/reset-password" });
     if (error) setMsg(t(ro(error.message))); else setOk(true);
     setBusy(false);
   };
