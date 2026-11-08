@@ -7,11 +7,12 @@ import { DEF, load } from "./lib/settings";
 import Home from "./components/Home";
 import Instr from "./components/Instructions";
 import Cont from "./components/Account";
+import Report from "./components/Report";
 import Prog from "./components/Booking";
 import { Login, Signup, Forgot, Reset } from "./components/Auth";
 
 const LINK_OK = /^(https:\/\/eservicii\.gov\.md\/asp\/dimtcca\/cerere\/[A-Za-z0-9]{3,12}\/Edit\/)?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/?([?#].*)?$/i;
-const LINKS = [["/", "Acasă"], ["/instructiuni", "Instrucțiuni"], ["/programare", "Programare"], ["/cont", "Cont"]];
+const LINKS = [["/", "Acasă"], ["/instructiuni", "Instrucțiuni"], ["/programare", "Programare"], ["/cont", "Cont"], ["/raporteaza-problema", "Raportează o problemă"]];
 const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function Authed({ user, children }) {
@@ -176,6 +177,7 @@ export default function App() {
             <Route path="/instructiuni" element={<Instr go={go} />} />
             <Route path="/programare" element={guard(<Prog s={s} set={setS} go={go} save={save} />)} />
             <Route path="/cont" element={guard(<Cont s={s} set={setS} user={user} />)} />
+            <Route path="/raporteaza-problema" element={<Report s={s} />} />
             <Route path="/login" element={<Authed user={user}><Login /></Authed>} />
             <Route path="/signup" element={<Authed user={user}><Signup /></Authed>} />
             <Route path="/forgot-password" element={<Forgot />} />

@@ -143,7 +143,7 @@ nav.open .burger i:nth-child(3){top:19px;transform:rotate(-45deg)}
 .theme:hover svg{transform:rotate(15deg) scale(1.1)}
 .theme[data-t="light"]:hover .sun,.theme[data-t="dark"]:hover .moon{transform:rotate(-90deg) scale(.3)}
 
-@media(max-width:760px){
+@media(max-width:960px){
   nav{padding:10px 14px;gap:8px}
   .logo{font-size:17px}
   .burger{display:block}
@@ -293,3 +293,10 @@ a.inl:hover{transform:translateX(4px)}
 .copy:active{transform:scale(.95)}
 .copy.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
 @media(max-width:560px){.payrow:not(.col){flex-direction:column;align-items:stretch;gap:6px}}
+
+/* --- report form --- */
+textarea{display:block;width:100%;min-height:150px;padding:11px 13px;border-radius:10px;border:1px solid var(--line);background:var(--bg);resize:vertical;font:inherit;color:inherit;transition:border-color .25s,box-shadow .25s}
+textarea:focus{border-color:var(--b);box-shadow:0 0 0 4px color-mix(in srgb,var(--b) 22%,transparent)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+.sent{text-align:center;animation:pop2 .5s cubic-bezier(.2,.9,.3,1.1)}
+.sent .tick{width:64px;height:64px;margin:6px auto 16px;border-radius:50%;display:grid;place-items:center;font:800 30px Unbounded,sans-serif;background:var(--ok);color:#fff;animation:starpop .6s cubic-bezier(.3,1.7,.5,1)}
